@@ -293,8 +293,8 @@ body {
 /* Checkboxes */
 .checkbox-group {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 12px 20px;
 }
 
 .checkbox-label {
