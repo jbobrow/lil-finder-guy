@@ -22,7 +22,7 @@ document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
 
 // SETUP: Replace this URL with your deployed Google Apps Script web app URL.
 // See SETUP.md for instructions on creating the Google Apps Script.
-const GOOGLE_SCRIPT_URL = '';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwF4N2gef4_rRBTDtziNGAyMCgykZmlyGiyrYWnZ4eh829fUn9o1VRnOEKscCtu8FMU/exec';
 
 const form = document.getElementById('interest-form');
 const submitBtn = document.getElementById('submit-btn');
