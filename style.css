@@ -290,6 +290,15 @@ body {
   min-height: 0;
 }
 
+/* Honeypot (anti-spam) */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 /* Checkboxes */
 .checkbox-group {
   display: flex;

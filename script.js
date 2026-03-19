@@ -64,6 +64,14 @@ form.addEventListener('submit', async (e) => {
     valid = false;
   }
 
+  // Honeypot check — if filled, silently bail (it's a bot)
+  const honeypot = document.getElementById('website').value;
+  if (honeypot) {
+    form.style.display = 'none';
+    formSuccess.classList.add('visible');
+    return;
+  }
+
   if (!valid) return;
 
   const data = {

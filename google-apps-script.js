@@ -7,6 +7,7 @@
  */
 
 const SHEET_NAME = 'Responses';
+const RATE_LIMIT_SECONDS = 30; // min seconds between submissions per email
 
 function doPost(e) {
   try {
@@ -20,6 +21,23 @@ function doPost(e) {
     }
 
     const data = JSON.parse(e.postData.contents);
+
+    // Honeypot — reject if the hidden field was filled
+    if (data.website) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ status: 'ok' })
+      ).setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Rate limit by email using script-level cache
+    const cache = CacheService.getScriptCache();
+    const cacheKey = 'rate_' + (data.email || '').toLowerCase().trim();
+    if (cache.get(cacheKey)) {
+      return ContentService.createTextOutput(
+        JSON.stringify({ status: 'ok' })
+      ).setMimeType(ContentService.MimeType.JSON);
+    }
+    cache.put(cacheKey, 'true', RATE_LIMIT_SECONDS);
 
     sheet.appendRow([
       data.timestamp || new Date().toISOString(),
